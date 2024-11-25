@@ -1,11 +1,13 @@
-let myAudio = new Audio("img/Music.mp3"); // Create an Audio object with the file 'Ceylon.mp3'
+let myAudio = new Audio('img/Music.mp3'); // Убедитесь, что путь к файлу правильный
 
-window.onload = function() {
-    setInterval(GameLoop, 1000 / 10); // Start the game loop when the window is loaded
+window.onload = function () {
+    setInterval(function () {
+        // Проверка, если аудио приостановлено
+        if (myAudio.paused) {
+            // Пытаемся воспроизвести аудио
+            myAudio.play().catch(function (error) {
+                console.log("Ошибка при воспроизведении аудио:", error);
+            });
+        }
+    }, 1000); // Проверка каждую секунду
 };
-
-function GameLoop() {
-    if (myAudio.paused) { // Check if the audio is paused
-        myAudio.play(); // If paused, play the audio
-    }
-}
